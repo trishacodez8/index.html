@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>K-POP WAVE</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #09090d;
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND */
+
+#background {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: -3;
+  transition: background-image 1s ease;
+}
+
+#background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,.45),
+      rgba(9,9,13,.96)
+    );
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 230px;
+  background: rgba(10,10,15,.94);
+  padding: 25px 18px;
+  z-index: 20;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 35px;
+}
+
+.logo span {
+  color: #ff4fa3;
+}
+
+.nav-title {
+  color: #888;
+  font-size: 12px;
+  margin: 25px 10px 10px;
+  text-transform: uppercase;
+}
+
+.nav button {
+  width: 100%;
+  background: none;
+  border: 0;
+  color: #ddd;
+  text-align: left;
+  padding: 13px 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-bottom: 4px;
+}
+
+.nav button:hover {
+  background: #20202a;
+  color: white;
+}
+
+/* MAIN */
+
+.main {
+  margin-left: 230px;
+  padding-bottom: 110px;
+}
+
+/* TOP */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(9,9,13,.7);
+  backdrop-filter: blur(15px);
+}
+
+.search {
+  width: 55%;
+  max-width: 600px;
+}
+
+.search input {
+  width: 100%;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 30px;
+  background: #25252e;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 430px;
+  padding: 70px 50px;
+  display: flex;
+  align-items: end;
+}
+
+.hero-content {
+  max-width: 650px;
+}
+
+.small {
+  color: #ff77ba;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 7vw, 80px);
+  margin: 12px 0;
+}
+
+.hero p {
+  color: #ddd;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.hero button {
+  padding: 14px 25px;
+  border: 0;
+  border-radius: 25px;
+  background: white;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* CONTENT */
+
+.content {
+  padding: 20px 40px;
+}
+
+.section-title {
+  font-size: 25px;
+  margin: 30px 0 18px;
+}
+
+/* SONG CARDS */
+
+.song-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.song-card {
+  background: rgba(24,24,31,.88);
+  padding: 14px;
+  border-radius: 14px;
+  transition: .2s;
+}
+
+.song-card:hover {
+  transform: translateY(-5px);
+  background: #292934;
+}
+
+.cover {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.song-name {
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+.artist {
+  color: #aaa;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.play {
+  flex: 1;
+  border: 0;
+  background: #ff4fa3;
+  color: white;
+  padding: 9px;
+  border-radius: 20px;
+}
+
+.favorite {
+  width: 40px;
+  border: 0;
+  border-radius: 20px;
+  background: #33333e;
+  color: white;
+}
+
+/* GROUPS */
+
+.group-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fill, minmax(210px, 1fr));
+  gap: 18px;
+}
+
+.group-card {
+  background: #18181f;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.group-card h3 {
+  margin: 0 0 7px;
+}
+
+.group-card p {
+  color: #aaa;
+  margin: 5px 0;
+}
+
+.group-card button {
+  margin-top: 12px;
+  border: 0;
+  background: #ff4fa3;
+  color: white;
+  padding: 9px 15px;
+  border-radius: 20px;
+}
+
+/* PLAYER */
+
+.player {
+  position: fixed;
+  bottom: 0;
+  left: 230px;
+  right: 0;
+  height: 80px;
+  background: rgba(18,18,24,.96);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 25px;
+  z-index: 30;
+}
+
+.player img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 7px;
+}
+
+.player-info {
+  min-width: 150px;
+}
+
+.player-title {
+  font-weight: bold;
+}
+
+.player-artist {
+  color: #999;
+  font-size: 13px;
+}
+
+audio {
+  flex: 1;
+  max-width: 600px;
+}
+
+/* MODAL */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 20px;
+}
+
+.modal-box {
+  background: #19191f;
+  max-width: 550px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.modal-box img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.close {
+  float: right;
+  border: 0;
+  background: #333;
+  color: white;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+
+.member {
+  background: #24242d;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .sidebar {
+    position: fixed;
+    width: 100%;
+    height: 65px;
+    top: auto;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    padding: 5px;
+  }
+
+  .logo,
+  .nav-title {
+    display: none;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .nav button {
+    width: auto;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .topbar {
+    padding: 15px;
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  .hero {
+    padding: 50px 25px;
+    min-height: 400px;
+  }
+
+  .content {
+    padding: 15px;
+  }
+
+  .song-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .player {
+    left: 0;
+    height: 80px;
+    padding: 8px;
+  }
+
+  .player-info {
+    min-width: 100px;
+  }
+
+  audio {
+    width: 120px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="background"></div>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+  <div class="logo">
+    🎧 K-POP <span>WAVE</span>
+  </div>
+
+  <div class="nav">
+
+    <button onclick="home()">
+      🏠 Home
+    </button>
+
+    <button onclick="showSearch()">
+      🔎 Search
+    </button>
+
+    <button onclick="showGroups()">
+      👥 Groups
+    </button>
+
+    <button onclick="showFavorites()">
+      ❤️ Favorites
+    </button>
+
+  </div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+  <div class="topbar">
+
+    <div class="search">
+
+      <input
+        id="searchInput"
+        placeholder="Search songs, artists, albums..."
+        onkeydown="if(event.key==='Enter') searchMusic()"
+      >
+
+    </div>
+
+  </div>
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="small">
+        K-POP MUSIC
+      </div>
+
+      <h1 id="heroTitle">
+        K-POP WAVE
+      </h1>
+
+      <p id="heroText">
+        Discover K-pop songs, albums, artists,
+        groups and members.
+      </p>
+
+      <button onclick="searchMusic()">
+        🔎 Explore Music
+      </button>
+
+    </div>
+
+  </section>
+
+  <div class="content">
+
+    <h2 class="section-title">
+      🔥 K-pop right now
+    </h2>
+
+    <div id="songs" class="song-grid"></div>
+
+    <h2 class="section-title">
+      👥 K-pop Groups
+    </h2>
+
+    <div id="groups" class="group-grid"></div>
+
+  </div>
+
+</div>
+
+<!-- PLAYER -->
+
+<div class="player">
+
+  <img id="playerCover"
+       src="https://placehold.co/100x100">
+
+  <div class="player-info">
+
+    <div id="playerTitle" class="player-title">
+      Nothing playing
+    </div>
+
+    <div id="playerArtist" class="player-artist">
+      Choose a song
+    </div>
+
+  </div>
+
+  <audio id="audio"
+         controls>
+  </audio>
+
+</div>
+
+<!-- GROUP MODAL -->
+
+<div id="modal" class="modal">
+
+  <div class="modal-box">
+
+    <button class="close"
+            onclick="closeModal()">
+      ×
+    </button>
+
+    <div id="modalContent"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+/* =========================
+   GROUP DATABASE
+========================= */
+
+const groups = [
+
+  {
+    name: "NewJeans",
+    debut: "2022",
+    members: [
+      "Minji",
+      "Hanni",
+      "Danielle",
+      "Haerin",
+      "Hyein"
+    ],
+    description:
+      "A South Korean girl group known for its pop, R&B and Y2K-inspired musical style."
+  },
+
+  {
+    name: "BLACKPINK",
+    debut: "2016",
+    members: [
+      "Jisoo",
+      "Jennie",
+      "Rosé",
+      "Lisa"
+    ],
+    description:
+      "A South Korean girl group with music spanning pop, hip-hop and EDM influences."
+  },
+
+  {
+    name: "BTS",
+    debut: "2013",
+    members: [
+      "RM",
+      "Jin",
+      "SUGA",
+      "j-hope",
+      "Jimin",
+      "V",
+      "Jung Kook"
+    ],
+    description:
+      "A South Korean boy group known for pop, hip-hop and R&B music."
+  },
+
+  {
+    name: "TWICE",
+    debut: "2015",
+    members: [
+      "Nayeon",
+      "Jeongyeon",
+      "Momo",
+      "Sana",
+      "Jihyo",
+      "Mina",
+      "Dahyun",
+      "Chaeyoung",
+      "Tzuyu"
+    ],
+    description:
+      "A nine-member South Korean girl group."
+  },
+
+  {
+    name: "aespa",
+    debut: "2020",
+    members: [
+      "Karina",
+      "Giselle",
+      "Winter",
+      "Ningning"
+    ],
+    description:
+      "A South Korean girl group known for futuristic concepts and electronic pop."
+  },
+
+  {
+    name: "IVE",
+    debut: "2021",
+    members: [
+      "Gaeul",
+      "Yujin",
+      "Rei",
+      "Wonyoung",
+      "Liz",
+      "Leeseo"
+    ],
+    description:
+      "A South Korean girl group known for pop releases and polished performance concepts."
+  },
+
+  {
+    name: "LE SSERAFIM",
+    debut: "2022",
+    members: [
+      "Sakura",
+      "Chaewon",
+      "Yunjin",
+      "Kazuha",
+      "Eunchae"
+    ],
+    description:
+      "A South Korean girl group known for dance-pop and performance-focused releases."
+  },
+
+  {
+    name: "Stray Kids",
+    debut: "2018",
+    members: [
+      "Bang Chan",
+      "Lee Know",
+      "Changbin",
+      "Hyunjin",
+      "Han",
+      "Felix",
+      "Seungmin",
+      "I.N"
+    ],
+    description:
+      "A South Korean boy group associated with self-produced music and hip-hop/electronic styles."
+  },
+
+  {
+    name: "SEVENTEEN",
+    debut: "2015",
+    members: [
+      "S.Coups",
+      "Jeonghan",
+      "Joshua",
+      "Jun",
+      "Hoshi",
+      "Wonwoo",
+      "Woozi",
+      "DK",
+      "Mingyu",
+      "The8",
+      "Seungkwan",
+      "Vernon",
+      "Dino"
+    ],
+    description:
+      "A South Korean boy group with thirteen members organized into performance, hip-hop and vocal units."
+  },
+
+  {
+    name: "ENHYPEN",
+    debut: "2020",
+    members: [
+      "Jungwon",
+      "Heeseung",
+      "Jay",
+      "Jake",
+      "Sunghoon",
+      "Sunoo",
+      "Ni-ki"
+    ],
+    description:
+      "A South Korean boy group known for pop and performance-oriented music."
+  }
+
+];
+
+
+/* =========================
+   DISPLAY GROUPS
+========================= */
+
+function showGroups() {
+
+  document.getElementById("groups").innerHTML =
+    groups.map((group, index) => `
+
+      <div class="group-card">
+
+        <h3>
+          ${group.name}
+        </h3>
+
+        <p>
+          Debut: ${group.debut}
+        </p>
+
+        <p>
+          ${group.members.length} members
+        </p>
+
+        <button onclick="openGroup(${index})">
+          View Group
+        </button>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =========================
+   GROUP MODAL
+========================= */
+
+function openGroup(index) {
+
+  const group = groups[index];
+
+  document.getElementById("modalContent").innerHTML = `
+
+    <h1>
+      ${group.name}
+    </h1>
+
+    <p>
+      ${group.description}
+    </p>
+
+    <p>
+      <b>Debut:</b> ${group.debut}
+    </p>
+
+    <h2>
+      Members
+    </h2>
+
+    ${group.members.map(member => `
+
+      <div class="member">
+        🧑‍🎤 ${member}
+      </div>
+
+    `).join("")}
+
+  `;
+
+  document.getElementById("modal")
+    .style.display = "flex";
+
+}
+
+
+function closeModal() {
+
+  document.getElementById("modal")
+    .style.display = "none";
+
+}
+
+
+/* =========================
+   MUSIC SEARCH
+========================= */
+
+async function searchMusic() {
+
+  const input =
+    document.getElementById("searchInput");
+
+  const query =
+    input.value.trim() || "K-pop";
+
+  const songs =
+    document.getElementById("songs");
+
+  songs.innerHTML =
+    "<p>🔎 Searching for music...</p>";
+
+  try {
+
+    const url =
+      "https://itunes.apple.com/search?term="
+      + encodeURIComponent(query)
+      + "&media=music"
+      + "&entity=song"
+      + "&limit=30"
+      + "&country=PH";
+
+    const response =
+      await fetch(url);
+
+    const data =
+      await response.json();
+
+    const kpopSongs =
+      data.results.filter(song => {
+
+        const text =
+          (
+            song.artistName +
+            " " +
+            song.trackName +
+            " " +
+            song.collectionName
+          ).toLowerCase();
+
+        return true;
+
+      });
+
+    if (kpopSongs.length === 0) {
+
+      songs.innerHTML =
+        "<p>No music found.</p>";
+
+      return;
+
+    }
+
+    songs.innerHTML =
+      kpopSongs.map(song => `
+
+        <div class="song-card">
+
+          <img
+            class="cover"
+            src="${song.artworkUrl100 || 'https://placehold.co/300'}"
+          >
+
+          <div class="song-name">
+            ${song.trackName}
+          </div>
+
+          <div class="artist">
+            ${song.artistName}
+          </div>
+
+          <div class="artist">
+            ${song.collectionName || ""}
+          </div>
+
+          <div class="card-buttons">
+
+            ${
+              song.previewUrl
+              ?
+              `
+              <button
+                class="play"
+                onclick='playSong(${JSON.stringify(song)})'>
+                ▶ Play
+              </button>
+              `
+              :
+              `
+              <button
+                class="play"
+                onclick='openMusic(${JSON.stringify(song)})'>
+                🎵 Open
+              </button>
+              `
+            }
+
+            <button
+              class="favorite"
+              onclick='favoriteSong(${JSON.stringify(song)})'>
+              ♡
+            </button>
+
+          </div>
+
+        </div>
+
+      `).join("");
+
+  } catch (error) {
+
+    songs.innerHTML = `
+      <p>
+        ⚠️ Could not load music.
+        Check your internet connection.
+      </p>
+    `;
+
+  }
+
+}
+
+
+/* =========================
+   PLAYER
+========================= */
+
+function playSong(song) {
+
+  const audio =
+    document.getElementById("audio");
+
+  audio.src =
+    song.previewUrl;
+
+  audio.play();
+
+  document.getElementById("playerCover")
+    .src =
+    song.artworkUrl100;
+
+  document.getElementById("playerTitle")
+    .textContent =
+    song.trackName;
+
+  document.getElementById("playerArtist")
+    .textContent =
+    song.artistName;
+
+}
+
+
+/* =========================
+   OPEN FULL MUSIC PAGE
+========================= */
+
+function openMusic(song) {
+
+  if (song.trackViewUrl) {
+
+    window.open(
+      song.trackViewUrl,
+      "_blank"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   FAVORITES
+========================= */
+
+function favoriteSong(song) {
+
+  let favorites =
+    JSON.parse(
+      localStorage.getItem("favorites") || "[]"
+    );
+
+  const exists =
+    favorites.some(
+      item => item.trackId === song.trackId
+    );
+
+  if (!exists) {
+
+    favorites.push(song);
+
+    localStorage.setItem(
+      "favorites",
+      JSON.stringify(favorites)
+    );
+
+    alert("❤️ Added to favorites!");
+
+  } else {
+
+    alert("Already in favorites!");
+
+  }
+
+}
+
+
+function showFavorites() {
+
+  const songs =
+    document.getElementById("songs");
+
+  let favorites =
+    JSON.parse(
+      localStorage.getItem("favorites") || "[]"
+    );
+
+  if (favorites.length === 0) {
+
+    songs.innerHTML =
+      "<p>You haven't saved any songs yet.</p>";
+
+    return;
+
+  }
+
+  songs.innerHTML =
+    favorites.map(song => `
+
+      <div class="song-card">
+
+        <img
+          class="cover"
+          src="${song.artworkUrl100}"
+        >
+
+        <div class="song-name">
+          ${song.trackName}
+        </div>
+
+        <div class="artist">
+          ${song.artistName}
+        </div>
+
+        <div class="card-buttons">
+
+          ${
+            song.previewUrl
+            ?
+            `
+            <button
+              class="play"
+              onclick='playSong(${JSON.stringify(song)})'>
+              ▶ Play
+            </button>
+            `
+            :
+            ""
+          }
+
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function home() {
+
+  document.getElementById("heroTitle")
+    .textContent =
+    "K-POP WAVE";
+
+  document.getElementById("heroText")
+    .textContent =
+    "Discover K-pop songs, albums, artists, groups and members.";
+
+  searchMusic();
+
+  showGroups();
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function showSearch() {
+
+  document
+    .getElementById("searchInput")
+    .focus();
+
+}
+
+
+/* =========================
+   CHANGING BACKGROUND
+========================= */
+
+let backgroundSongs = [];
+
+async function loadBackgrounds() {
+
+  try {
+
+    const response =
+      await fetch(
+        "https://itunes.apple.com/search?term=kpop&media=music&entity=song&limit=50&country=PH"
+      );
+
+    const data =
+      await response.json();
+
+    backgroundSongs =
+      data.results.filter(
+        song => song.artworkUrl100
+      );
+
+    changeBackground();
+
+    setInterval(
+      changeBackground,
+      8000
+    );
+
+  } catch (error) {
+
+    document.getElementById("background")
+      .style.background =
+      "linear-gradient(135deg,#241336,#0c1225)";
+
+  }
+
+}
+
+
+function changeBackground() {
+
+  if (!backgroundSongs.length)
+    return;
+
+  const song =
+    backgroundSongs[
+      Math.floor(
+        Math.random() *
+        backgroundSongs.length
+      )
+    ];
+
+  const image =
+    song.artworkUrl100
+      .replace(
+        "100x100",
+        "1000x1000"
+      );
+
+  document.getElementById("background")
+    .style.backgroundImage =
+    `url("${image}")`;
+
+}
+
+
+/* START */
+
+searchMusic();
+showGroups();
+loadBackgrounds();
+
+</script>
+
+</body>
+</html>
